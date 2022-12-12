@@ -175,7 +175,18 @@ contract Median is LibNote {
 }
 
 contract MedianETHJPY is Median {
-    bytes32 public constant wat = "ethjpy";
+    bytes32 public constant wat = "ETHJPY";
+
+    function recover(uint256 val_, uint256 age_, uint8 v, bytes32 r, bytes32 s) internal pure returns (address) {
+        return ecrecover(
+            keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", keccak256(abi.encodePacked(val_, age_, wat)))),
+            v, r, s
+        );
+    }
+}
+
+contract MedianDAIJPY is Median {
+    bytes32 public constant wat = "DAIJPY";
 
     function recover(uint256 val_, uint256 age_, uint8 v, bytes32 r, bytes32 s) internal pure returns (address) {
         return ecrecover(
@@ -186,7 +197,7 @@ contract MedianETHJPY is Median {
 }
 
 contract MedianFAUJPY is Median {
-    bytes32 public constant wat = "faujpy";
+    bytes32 public constant wat = "FAUJPY";
 
     function recover(uint256 val_, uint256 age_, uint8 v, bytes32 r, bytes32 s) internal pure returns (address) {
         return ecrecover(
